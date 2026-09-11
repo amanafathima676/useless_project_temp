@@ -18,7 +18,8 @@ function renderCareerCertificate(container, verdictData, candidateName, answers)
   const {
     career_verdict,
     stream_badge,
-    malayali_subheading
+    malayali_subheading,
+    ammavan_quote
   } = verdictData;
 
   // Determine stream accent class
@@ -185,28 +186,6 @@ function renderCareerCertificate(container, verdictData, candidateName, answers)
       }
     }
   }, 450);
-
-  // Playful Celebratory Confetti Burst across Certificate
-  function triggerConfettiBurst(targetWrapper) {
-    if (!targetWrapper) return;
-    const colors = ["#126a5d", "#b8860b", "#ba1a1a", "#b2efdf", "#f59e0b", "#00362d"];
-    for (let i = 0; i < 35; i++) {
-      const piece = document.createElement("div");
-      piece.className = "confetti-particle";
-      piece.style.left = (Math.random() * 92 + 4) + "%";
-      piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-      piece.style.animationDelay = (Math.random() * 1.2) + "s";
-      piece.style.animationDuration = (2.2 + Math.random() * 2) + "s";
-      piece.style.transform = `rotate(${Math.random() * 360}deg)`;
-      targetWrapper.appendChild(piece);
-      setTimeout(() => piece.remove(), 4500);
-    }
-  }
-
-  const certWrapper = container.querySelector(".certificate-wrapper");
-  if (certWrapper) {
-    triggerConfettiBurst(certWrapper);
-  }
 
   // Interactive Re-stamp on the rubber stamp
   const stampEl = document.getElementById("rubberStamp");

@@ -121,10 +121,33 @@ class AppCoordinator {
     this.initElements();
     this.bindEvents();
     this.updateAudioButtonState();
+    this.startLoadingSequence();
+  }
+
+  startLoadingSequence() {
+    const loaderEl = this.screens.loading;
+    const fillEl = document.getElementById("loaderProgress");
+    const totalMs = 5000;
+    const startedAt = performance.now();
+    const step = (now) => {
+      const elapsed = now - startedAt;
+      const pct = Math.min(100, (elapsed / totalMs) * 100);
+      if (fillEl) fillEl.style.width = `${pct}%`;
+      if (elapsed < totalMs) {
+        if (this._loaderAnimId) cancelAnimationFrame(this._loaderAnimId);
+        this._loaderAnimId = requestAnimationFrame(step);
+      } else {
+        if (loaderEl) loaderEl.classList.add("hidden");
+        this.showScreen("title");
+      }
+    };
+    if (this._loaderAnimId) cancelAnimationFrame(this._loaderAnimId);
+    this._loaderAnimId = requestAnimationFrame(step);
   }
 
   initElements() {
     this.screens = {
+      loading: document.getElementById("screenLoading"),
       title: document.getElementById("screenTitle"),
       questions: document.getElementById("screenQuestions"),
       evaluating: document.getElementById("screenEvaluating"),
@@ -233,45 +256,6 @@ class AppCoordinator {
         this.restart();
       });
     }
-
-    // Floating Badges on Clay Diorama
-    const badgePressure = document.getElementById("badgePressure");
-    const badgeUncle = document.getElementById("badgeUncle");
-    const tooltip = document.getElementById("badgeTooltip");
-
-    if (badgePressure && tooltip) {
-      badgePressure.addEventListener("click", (e) => {
-        e.stopPropagation();
-        audioManager.playClick();
-        if (!tooltip.classList.contains("hidden") && tooltip.dataset.type === "pressure") {
-          tooltip.classList.add("hidden");
-        } else {
-          tooltip.dataset.type = "pressure";
-          tooltip.textContent = "Societal metric: 42 maternal aunts and 14 WhatsApp family groups awaiting engineering entrance results.";
-          tooltip.classList.remove("hidden");
-        }
-      });
-    }
-
-    if (badgeUncle && tooltip) {
-      badgeUncle.addEventListener("click", (e) => {
-        e.stopPropagation();
-        audioManager.playClick();
-        if (!tooltip.classList.contains("hidden") && tooltip.dataset.type === "uncle") {
-          tooltip.classList.add("hidden");
-        } else {
-          tooltip.dataset.type = "uncle";
-          tooltip.textContent = "Tribunal verdict: UAE and Dallas relatives evaluating matrimonial prospects vs B.Tech.";
-          tooltip.classList.remove("hidden");
-        }
-      });
-    }
-
-    document.addEventListener("click", (e) => {
-      if (tooltip && !tooltip.contains(e.target) && e.target !== badgePressure && e.target !== badgeUncle) {
-        tooltip.classList.add("hidden");
-      }
-    });
   }
 
   updateAudioButtonState() {
@@ -334,8 +318,7 @@ class AppCoordinator {
       this.questionContainer.innerHTML = `
         <div class="step-card animate-fadeIn">
           <span class="step-badge">${step.tag}</span>
-          <h2 class="step-title">${step.title}</h2>
-          <p class="step-subtitle">${step.subtitle}</p>
+          <h2 class="step-title">${step.subtitle}</h2>
           <div class="free-text-wrap">
             <textarea id="freeTextInput" class="form-textarea" rows="4" placeholder="${step.placeholder}">${savedAnswer}</textarea>
             <div class="textarea-hint">Press Enter or click the button below to generate your destiny</div>
@@ -351,10 +334,11 @@ class AppCoordinator {
         const isSelected = savedAnswer === opt.text;
         return `
           <button type="button" class="option-card ${isSelected ? 'selected' : ''}" data-index="${idx}" data-value="${opt.text}">
-            <span class="option-letter">${opt.letter}</span>
-            <span class="option-icon">${opt.icon}</span>
-            <span class="option-text">${opt.text}</span>
-            <span class="option-check">${isSelected ? '✓' : ''}</span>
+            <span class="option-label">
+              <span class="option-letter">${opt.letter}</span>
+              <span class="option-text">${opt.text}</span>
+              <span class="option-check">${isSelected ? '✓' : ''}</span>
+            </span>
           </button>
         `;
       }).join("");
@@ -362,14 +346,9 @@ class AppCoordinator {
       this.questionContainer.innerHTML = `
         <div class="step-card animate-fadeIn">
           <span class="step-badge">${step.tag}</span>
-          <h2 class="step-title">${step.title}</h2>
-          <p class="step-subtitle">${step.subtitle}</p>
+          <h2 class="step-title">${step.subtitle}</h2>
           <div class="options-grid">
             ${optionsHtml}
-          </div>
-          <div class="custom-answer-row">
-            <span class="custom-label">Custom Input:</span>
-            <input type="text" id="customInput" class="form-input" placeholder="${step.placeholder}" value="${step.options.some(o => o.text === savedAnswer) ? '' : savedAnswer}">
           </div>
         </div>
       `;
@@ -572,4 +551,10 @@ class AppCoordinator {
 // Instantiate on DOM ready
 document.addEventListener("DOMContentLoaded", () => {
   window.appCoordinator = new AppCoordinator();
+
+  // Kinetic Grid background behind the quiz screen
+  const quizCanvas = document.getElementById("quizKineticGrid");
+  if (quizCanvas && typeof initKineticGrid === "function") {
+    window.quizKineticGrid = initKineticGrid(quizCanvas);
+  }
 });

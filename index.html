@@ -25,8 +25,37 @@
     <!-- Main Dynamic Content Area -->
     <main class="kiosk-main">
 
+      <!-- Screen 0: Loading Screen (Hamster Boot Sequence) -->
+      <section id="screenLoading" class="screen">
+        <div class="loader-card animate-fadeIn">
+          <div aria-label="Orange and tan hamster running in a metal wheel" role="img" class="wheel-and-hamster">
+            <div class="wheel"></div>
+            <div class="hamster">
+              <div class="hamster__body">
+                <div class="hamster__head">
+                  <div class="hamster__ear"></div>
+                  <div class="hamster__eye"></div>
+                  <div class="hamster__nose"></div>
+                </div>
+                <div class="hamster__limb hamster__limb--fr"></div>
+                <div class="hamster__limb hamster__limb--fl"></div>
+                <div class="hamster__limb hamster__limb--br"></div>
+                <div class="hamster__limb hamster__limb--bl"></div>
+                <div class="hamster__tail"></div>
+              </div>
+            </div>
+            <div class="spoke"></div>
+          </div>
+          <h2 class="loader-title">Running the Malayali Rat Race</h2>
+          <p class="loader-sub">Running peripheral diagnostics on unreachable dreams...</p>
+          <div class="loader-progress-track">
+            <div id="loaderProgress" class="loader-progress-fill"></div>
+          </div>
+        </div>
+      </section>
+
       <!-- Screen 1: New Stitch Claymation Hero Screen -->
-      <section id="screenTitle" class="screen">
+      <section id="screenTitle" class="screen hidden">
         <div class="hero-clay-card animate-fadeIn">
           <!-- Top Accent Gradient Line -->
           <div class="card-accent-top"></div>
@@ -42,21 +71,7 @@
                 loading="eager"
               >
 
-              <!-- Floating Interactive Badge 1: Societal Pressure -->
-              <button type="button" class="floating-badge badge-pressure" id="badgePressure">
-                <span class="f-icon">⚠️</span>
-                <span>Societal Pressure: <strong>99.4%</strong></span>
-              </button>
-
-              <!-- Floating Interactive Badge 2: Uncle Consensus -->
-              <button type="button" class="floating-badge badge-uncle" id="badgeUncle">
-                <span class="f-icon">⚖️</span>
-                <span>Uncle Consensus: <strong>Pending</strong></span>
-              </button>
-
-              <!-- Tooltip Overlay -->
-              <div id="badgeTooltip" class="badge-tooltip hidden animate-fadeIn"></div>
-            </div>
+              </div>
           </div>
 
           <!-- Main Typography & Call To Action -->
@@ -91,6 +106,7 @@
 
       <!-- Screen 2: Questionnaire Stepper -->
       <section id="screenQuestions" class="screen hidden">
+        <canvas id="quizKineticGrid" class="kinetic-grid-canvas" aria-hidden="true"></canvas>
         <div class="stepper-card animate-fadeIn">
           <div class="stepper-header-row">
             <div class="stepper-meta-pill">
@@ -181,6 +197,7 @@
   <script src="js/persona-prompt.js"></script>
   <script src="js/api-client.js"></script>
   <script src="js/audio.js"></script>
+  <script src="js/kinetic-grid.js"></script>
   <script src="js/certificate.js"></script>
   <script src="js/app.js"></script>
 </body>
