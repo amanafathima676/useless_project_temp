@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oru Average Malayali — Familial Career Allocation Protocol</title>
+  <meta name="description" content="Your career was decided before you were born. Let's make it official.">
+  <meta property="og:title" content="Oru Average Malayali — Familial Career Allocation Protocol">
+  <meta property="og:description" content="Your career was decided before you were born. Let's make it official.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400&family=Cinzel:wght@700;900&family=Caveat:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="kiosk-body">
+
+  <!-- Background Ambient Glowing Orbs -->
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+  <div class="orb orb-3" aria-hidden="true"></div>
+
+  <!-- Main Kiosk Wrapper -->
+  <div class="kiosk-app-wrapper">
+
+    <!-- Main Dynamic Content Area -->
+    <main class="kiosk-main">
+
+      <!-- Screen 1: New Stitch Claymation Hero Screen -->
+      <section id="screenTitle" class="screen">
+        <div class="hero-clay-card animate-fadeIn">
+          <!-- Top Accent Gradient Line -->
+          <div class="card-accent-top"></div>
+
+          <!-- Claymation Diorama Media Container -->
+          <div class="diorama-container group">
+            <div class="diorama-glow"></div>
+            <div class="diorama-frame">
+              <img 
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzDnC5uoqfjXxsRP-gYKd9iXN0tvrplzz324Zxndr-_IavZCql7KnCOn7lhCtNP9rJhXzS_hb0GVl-L-ZrJv1dKUy_OtxnE8eX8PN0tuVgPX6ya5H_yIoOvZbDKU6RZm9y3XgISFa11YNMmydfwEFre3dD9fi7Lo6MbJpfS4-djPPZT0cWNCCOkhb_iFMer7tTC4Atg7Dsldo5P-TpLIk-Rs3bGdm9sRJp2eC3mRwscbqxRMvzMDo" 
+                alt="Claymation diorama of South Asian student at study desk surrounded by engineer hard hat, stethoscope, and nurse cap"
+                class="diorama-img"
+                loading="eager"
+              >
+
+              <!-- Floating Interactive Badge 1: Societal Pressure -->
+              <button type="button" class="floating-badge badge-pressure" id="badgePressure">
+                <span class="f-icon">⚠️</span>
+                <span>Societal Pressure: <strong>99.4%</strong></span>
+              </button>
+
+              <!-- Floating Interactive Badge 2: Uncle Consensus -->
+              <button type="button" class="floating-badge badge-uncle" id="badgeUncle">
+                <span class="f-icon">⚖️</span>
+                <span>Uncle Consensus: <strong>Pending</strong></span>
+              </button>
+
+              <!-- Tooltip Overlay -->
+              <div id="badgeTooltip" class="badge-tooltip hidden animate-fadeIn"></div>
+            </div>
+          </div>
+
+          <!-- Main Typography & Call To Action -->
+          <div class="hero-copy-block">
+            <h1 class="hero-title">Oru Average Malayali</h1>
+            <p class="hero-tagline">
+              Your career was decided before you were born. Let's make it official.
+            </p>
+
+            <!-- Name Input Field (Recessed Pill) -->
+            <div class="candidate-input-wrap">
+              <label for="candidateName" class="input-label">Aspirant Name / Alias (Optional):</label>
+              <input 
+                type="text" 
+                id="candidateName" 
+                class="recessed-input" 
+                placeholder="e.g. Rahul, Sneha, Appu..." 
+                autocomplete="off"
+              >
+            </div>
+
+            <!-- Primary Action Button -->
+            <div class="hero-cta-wrap">
+              <button type="button" id="btnStart" class="btn-primary-pill">
+                <span>Find Out My Future</span>
+                <span class="btn-arrow">→</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Screen 2: Questionnaire Stepper -->
+      <section id="screenQuestions" class="screen hidden">
+        <div class="stepper-card animate-fadeIn">
+          <div class="stepper-header-row">
+            <div class="stepper-meta-pill">
+              <span id="stepIndicator">STEP 1 OF 8</span>
+              <span class="dot-sep">•</span>
+              <span>MALAYALI DESTINY PROBE</span>
+            </div>
+            <div class="progress-channel">
+              <div id="progressBar" class="progress-pill-fill"></div>
+            </div>
+          </div>
+
+          <!-- Question Content Injected Dynamically by app.js -->
+          <div id="questionContainer"></div>
+
+          <!-- Stepper Controls -->
+          <div class="stepper-nav-row">
+            <button id="btnPrev" class="btn-ghost-pill" disabled>
+              <span>←</span>
+              <span>Previous</span>
+            </button>
+            <button id="btnNext" class="btn-primary-pill btn-next-step">
+              <span>Next Step</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Screen 3: Evaluating Loading Screen -->
+      <section id="screenEvaluating" class="screen hidden">
+        <div class="evaluating-clay-card animate-fadeIn">
+          <div class="clinical-spinner-wrap">
+            <div class="spinner-track-ring"></div>
+            <span class="spinner-center-icon">⚖️</span>
+          </div>
+          <h2 class="evaluating-title">Ammavan Council is Convening...</h2>
+          <p id="evaluatingSubtitle" class="evaluating-sub">
+            Converting non-remunerative aspirations into KTU B.Tech syllabus...
+          </p>
+        </div>
+      </section>
+
+      <!-- Screen 4: Career Certificate Screen (Rendered by certificate.js) -->
+      <section id="screenCertificate" class="screen hidden"></section>
+
+      <!-- Screen 5: Transition screen placeholder -->
+      <section id="screenTransition" class="screen hidden"></section>
+
+    </main>
+  </div>
+
+  <!-- Settings Modal (API Key & Model Selection) -->
+  <div id="settingsModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="settingsModalTitle">
+    <div class="modal-content animate-fadeIn">
+      <div class="modal-header">
+        <h3 id="settingsModalTitle" class="modal-title">⚙️ Engine & API Configuration</h3>
+        <button id="btnCloseSettings" class="modal-close" aria-label="Close Modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputGeminiKey">Google Gemini API Key (Optional):</label>
+          <input type="password" id="inputGeminiKey" class="recessed-input" placeholder="AIzaSy...">
+          <p class="modal-hint">
+            <strong>Pro Tip:</strong> Leave blank to run 100% offline on our curated <strong>Fallback Bank (20 rich satirical verdicts)</strong>. 
+            If you provide a key, live Gemini 2.5 Flash will be queried with a 4.5s race timeout.
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label for="selectModel">Model:</label>
+          <select id="selectModel" class="recessed-input">
+            <option value="gemini-2.5-flash">Gemini 2.5 Flash (Ultra-fast, Recommended)</option>
+            <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="btnSaveSettings" class="btn-primary-pill">Save & Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Logic Scripts -->
+  <script src="js/fallback-bank.js"></script>
+  <script src="js/persona-prompt.js"></script>
+  <script src="js/api-client.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/certificate.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
