@@ -1,0 +1,25 @@
+{
+  "name": "oru-average-malayali",
+  "version": "1.0.0",
+  "description": "An average Malayali Kido — Interactive Career Deciding Agent & 30-second Survival Simulator",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js 8080",
+    "start": "node server.js",
+    "test": "node test_act2.js",
+    "test:dom": "node test_dom.js"
+  },
+  "keywords": [
+    "malayali",
+    "career-agent",
+    "education-machine",
+    "tinkerhub",
+    "useless-projects"
+  ],
+  "author": "Silent Shields (Amana Fathima K F, Diya Joshy)",
+  "license": "MIT",
+  "dependencies": {
+    "@mediapipe/camera_utils": "^0.3.1675466862",
+    "@mediapipe/hands": "^0.4.1675469240"
+  }
+}

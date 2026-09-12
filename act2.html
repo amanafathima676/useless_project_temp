@@ -4,149 +4,198 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Oru Average Malayali — Act 2: Indian Education Machine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    .act2-container {
-      max-width: 900px;
-      margin: 2rem auto;
-      text-align: center;
-    }
-    .act2-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-glass);
-      border-radius: var(--radius-lg);
-      padding: 3rem 2rem;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-    }
-    .act2-stream-banner {
-      display: inline-block;
-      padding: 0.5rem 1.5rem;
-      background: rgba(230, 202, 101, 0.15);
-      border: 1px solid var(--border-glass);
-      border-radius: 999px;
-      color: var(--gold-primary);
-      font-weight: 700;
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      margin-bottom: 1.5rem;
-    }
-    .act2-stats-preview {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
-      margin: 2rem 0;
-      text-align: left;
-    }
-    .act2-stat-item {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-sm);
-      padding: 0.75rem 1rem;
-    }
-    .act2-stat-name {
-      display: block;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-    }
-    .act2-stat-val {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--gold-primary);
-    }
-    .danger-stat {
-      color: #ef4444 !important;
-    }
-  </style>
+  <link rel="stylesheet" href="css/act2.css">
 </head>
-<body>
-  <header class="top-nav">
-    <div class="brand-logo">
-      <span class="brand-icon">🎓</span>
+<body class="act2-body">
+
+  <!-- Top Navigation Header -->
+  <header class="act2-header">
+    <div class="act2-brand">
+      <span class="act2-brand-icon">🎓</span>
       <div>
-        <h1 class="brand-title">Oru Average Malayali</h1>
-        <p class="brand-sub">Act 2: Indian Education Machine</p>
+        <h1 class="act2-brand-title">Oru Average Malayali</h1>
+        <p id="act2Banner" class="act2-brand-sub">Act 2: Indian Education Machine</p>
       </div>
     </div>
-    <div class="nav-actions">
-      <a href="index.html" class="btn btn-secondary btn-sm">← Back to Act 1</a>
+
+    <!-- Center 30s Countdown Timer -->
+    <div class="act2-timer-container">
+      <div id="act2Timer" class="act2-timer-box">00:30</div>
+    </div>
+
+    <!-- Right Controls & Mode Toggle -->
+    <div class="act2-nav-right">
+      <span id="act2ModeBadge" class="mode-badge cam-active">WEBCAM HAND TRACKING</span>
+      <button id="btnToggleMouse" class="btn btn-secondary btn-sm" title="Toggle Mouse Mode (Shortcut: M)">
+        <span>🖱️ Mouse Mode [M]</span>
+      </button>
+      <a href="index.html" class="btn btn-secondary btn-sm">
+        <span>← Act 1</span>
+      </a>
     </div>
   </header>
 
-  <main class="main-container act2-container">
-    <div class="act2-card animate-fadeIn">
-      <div id="act2Banner" class="act2-stream-banner">
-        SIMULATING: CAREER EDITION
-      </div>
-      <h2 class="hero-heading">Indian Education <span>Machine</span></h2>
-      <p class="hero-subtitle">
-        Welcome to the 60-second survival simulator. Juggle your 8 student life dimensions using hand tracking.
-      </p>
+  <!-- Main Game Workspace -->
+  <main class="act2-workspace">
+    <!-- Left: Prominent Live Camera Feed (>75%) -->
+    <div class="act2-arena" id="act2FeedContainer">
+      <!-- Live Video Element -->
+      <video id="act2Video" class="act2-video-element" autoplay playsinline muted></video>
 
-      <div class="act2-stats-preview">
-        <div class="act2-stat-item">
-          <span class="act2-stat-name">Assignments</span>
-          <span class="act2-stat-val">50%</span>
-        </div>
-        <div class="act2-stat-item">
-          <span class="act2-stat-name">Hackathon</span>
-          <span class="act2-stat-val">50%</span>
-        </div>
-        <div class="act2-stat-item">
-          <span class="act2-stat-name">Placement Prep</span>
-          <span class="act2-stat-val">50%</span>
-        </div>
-        <div class="act2-stat-item">
-          <span class="act2-stat-name">Club Activities</span>
-          <span class="act2-stat-val">50%</span>
-        </div>
-        <div class="act2-stat-item">
-          <span class="act2-stat-name">Sleep</span>
-          <span class="act2-stat-val">50%</span>
-        </div>
-        <div class="act2-stat-item">
-          <span class="act2-stat-name">Friends</span>
-          <span class="act2-stat-val">50%</span>
-        </div>
-        <div class="act2-stat-item">
-          <span class="act2-stat-name">Record Submission</span>
-          <span class="act2-stat-val">50%</span>
-        </div>
-        <div class="act2-stat-item">
-          <span class="act2-stat-name">Mental Health</span>
-          <span class="act2-stat-val danger-stat">DECAYING...</span>
-        </div>
+      <!-- Cyber HUD Canvas Overlay -->
+      <canvas id="act2HudCanvas" class="act2-hud-canvas"></canvas>
+
+      <!-- 4 Direction Target Pills -->
+      <div id="pillAcademics" class="direction-pill pill-up">
+        <span class="pill-title">⬆️ ACADEMICS</span>
+        <span class="pill-penalty">Arts &amp; Sports (-20%)</span>
       </div>
 
-      <div class="hero-satire-box">
-        <p>
-          <strong>Act 2 Handoff Interface:</strong><br>
-          This screen is ready to receive live hand-tracking CV data from Person B 
-          (via WebSocket, MediaPipe JS, or Python backend bridge).
-        </p>
+      <div id="pillHackathons" class="direction-pill pill-right">
+        <span class="pill-title">➡️ HACKATHONS</span>
+        <span class="pill-penalty">Academics (-20%)</span>
       </div>
 
-      <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
-        <a href="index.html" class="btn btn-secondary">Restart Full Experience</a>
+      <div id="pillSkillDev" class="direction-pill pill-down">
+        <span class="pill-title">⬇️ SKILL DEV</span>
+        <span class="pill-penalty">Hackathons (-20%)</span>
       </div>
+
+      <div id="pillArtsSports" class="direction-pill pill-left">
+        <span class="pill-title">⬅️ ARTS &amp; SPORTS</span>
+        <span class="pill-penalty">Skill Dev (-20%)</span>
+      </div>
+
+      <!-- Intro Overlay -->
+      <div id="act2IntroOverlay" class="act2-overlay">
+        <div class="intro-modal-box">
+          <div class="intro-tag">ACT 2: SURVIVAL SIMULATOR</div>
+          <h2 class="intro-title">INDIAN EDUCATION MACHINE</h2>
+          <p class="intro-desc">
+            Point your forefinger or move your mouse towards the 4 directional targets to balance
+            your academic life. Every decision has an immediate trade-off. Try to survive 30 seconds!
+          </p>
+          <div style="display: flex; justify-content: center; gap: 1rem;">
+            <button id="btnStartAct2Intro" class="btn btn-primary btn-lg">
+              <span>🚀 PRESS SPACE OR CLICK TO START</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Countdown Overlay -->
+      <div id="act2CountdownOverlay" class="act2-overlay hidden">
+        <div id="act2CountdownNumber" class="countdown-number">3</div>
+      </div>
+
+      <!-- Result Card Container Overlay -->
+      <div id="act2ResultContainer" class="hidden"></div>
     </div>
+
+    <!-- Right: Real-time Stats Panel (<25%) -->
+    <aside class="act2-sidebar">
+      <div class="sidebar-header">
+        <h3 class="sidebar-title">REAL-TIME STATS</h3>
+        <span class="sidebar-subtitle">TRADE-OFF MONITOR</span>
+      </div>
+
+      <!-- Active Direction Indicator -->
+      <div id="act2ActiveZoneBox" class="active-zone-box">
+        <div class="active-zone-badge text-muted">HOLDING NEUTRAL (CENTER)</div>
+        <span class="active-penalty-note">Move ⬆️ ➡️ ⬇️ ⬅️ to focus</span>
+      </div>
+
+      <!-- 4 Primary Focus Progress Bars -->
+      <div class="stat-bars-container">
+        <!-- Academics -->
+        <div class="stat-bar-group">
+          <div class="stat-bar-header" style="color: #38bdf8;">
+            <span>⬆️ Academics</span>
+            <span id="valAcademics">50%</span>
+          </div>
+          <div class="stat-bar-track">
+            <div id="barAcademics" class="stat-bar-fill bar-academics" style="width: 50%;"></div>
+          </div>
+        </div>
+
+        <!-- Hackathons -->
+        <div class="stat-bar-group">
+          <div class="stat-bar-header" style="color: #facc15;">
+            <span>➡️ Hackathons</span>
+            <span id="valHackathons">50%</span>
+          </div>
+          <div class="stat-bar-track">
+            <div id="barHackathons" class="stat-bar-fill bar-hackathons" style="width: 50%;"></div>
+          </div>
+        </div>
+
+        <!-- Skill Dev -->
+        <div class="stat-bar-group">
+          <div class="stat-bar-header" style="color: #10b981;">
+            <span>⬇️ Skill Dev</span>
+            <span id="valSkillDev">50%</span>
+          </div>
+          <div class="stat-bar-track">
+            <div id="barSkillDev" class="stat-bar-fill bar-skill_dev" style="width: 50%;"></div>
+          </div>
+        </div>
+
+        <!-- Arts & Sports -->
+        <div class="stat-bar-group">
+          <div class="stat-bar-header" style="color: #f472b6;">
+            <span>⬅️ Arts &amp; Sports</span>
+            <span id="valArtsSports">50%</span>
+          </div>
+          <div class="stat-bar-track">
+            <div id="barArtsSports" class="stat-bar-fill bar-arts_sports" style="width: 50%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Radar Spider Chart -->
+      <div class="radar-chart-container">
+        <canvas id="act2RadarCanvas" width="200" height="200"></canvas>
+      </div>
+
+      <!-- System Vitals (Mini Ticker) -->
+      <div class="vitals-ticker-box">
+        <div class="vitals-title">SYSTEM VITALS (PASSIVE DECAY)</div>
+        <div class="vital-row">
+          <span class="vital-label">Sleep Level:</span>
+          <span id="vitalSleep" class="vital-val">7.5 hrs</span>
+        </div>
+        <div class="vital-row">
+          <span class="vital-label">Happiness:</span>
+          <span id="vitalHappiness" class="vital-val">65%</span>
+        </div>
+        <div class="vital-row">
+          <span class="vital-label">Passion:</span>
+          <span id="vitalPassion" class="vital-val">45%</span>
+        </div>
+        <div class="vital-row">
+          <span class="vital-label">Mental Stability:</span>
+          <span id="vitalMental" class="vital-val danger-stat">92%</span>
+        </div>
+      </div>
+
+      <!-- Quick Shortcuts Hint -->
+      <div class="shortcuts-hint">
+        [SPACE] Start | [R] Reset | [M] Mouse | [ESC] Exit
+      </div>
+    </aside>
   </main>
 
-  <script>
-    // Read session state from URL or localStorage (as specified in Architecture doc §2.3)
-    const urlParams = new URLSearchParams(window.location.search);
-    const candidate = urlParams.get('candidate');
-    const verdict = urlParams.get('verdict');
-    const stored = localStorage.getItem('oru_average_malayali_session');
-    const session = stored ? JSON.parse(stored) : null;
-
-    const displayVerdict = verdict || session?.careerVerdict || "Engineer";
-    const displayName = candidate || session?.candidateName || "Candidate";
-
-    const banner = document.getElementById('act2Banner');
-    if (banner) {
-      banner.textContent = `SIMULATING: ${displayVerdict.toUpperCase()} EDITION (${displayName})`;
-    }
-  </script>
+  <!-- Core Game Engine Scripts -->
+  <script src="js/zone-mapper.js"></script>
+  <script src="js/stat-engine.js"></script>
+  <script src="js/audio-synthesizer.js"></script>
+  <script src="js/radar-chart.js"></script>
+  <script src="js/result-card.js"></script>
+  <script src="js/hand-tracker.js"></script>
+  <script src="js/act2-app.js"></script>
 </body>
 </html>

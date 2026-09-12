@@ -230,16 +230,19 @@ function renderCareerCertificate(container, verdictData, candidateName, answers)
           <div class="banner-top-row">
             <div class="banner-badge-live">
               <span class="live-dot"></span>
-              <span>PERSON 2 OPENCV MANAGER LAUNCHING…</span>
+              <span>LAUNCHING SURVIVAL SIMULATOR…</span>
             </div>
-            <span class="banner-sub">Desktop OpenCV + Pygame Window</span>
+            <span class="banner-sub">Act 2: Interactive Web Experience</span>
           </div>
           <h3 class="banner-title">🚀 Starting the Indian Education Machine…</h3>
           <p class="banner-note">
-            Opening the webcam hand-tracking window on your desktop.<br>
-            Wait a few seconds, then check your taskbar for:<br>
-            <code>Act 2: Indian Education Machine - Oru Average Malayali</code>
+            Initializing camera and survival arena. Entering in 1 second...
           </p>
+          <div style="margin-top: 0.75rem;">
+            <a href="act2.html" class="btn btn-primary btn-sm">
+              <span>🎮 Enter Survival Arena Now →</span>
+            </a>
+          </div>
         </div>
       `;
     } else if (state === "error") {
@@ -248,46 +251,20 @@ function renderCareerCertificate(container, verdictData, candidateName, answers)
           <div class="banner-top-row">
             <div class="banner-badge-error">
               <span class="error-dot"></span>
-              <span>OPENCV MANAGER FAILED TO LAUNCH</span>
+              <span>LOCAL SERVER NOTICE</span>
             </div>
-            <span class="banner-sub">Desktop OpenCV + Pygame Window</span>
+            <span class="banner-sub">Standalone Web Mode Active</span>
           </div>
-          <h3 class="banner-title">⚠️ The Python window did not open.</h3>
+          <h3 class="banner-title">🎮 Entering Act 2 in Browser Mode</h3>
           <p class="banner-note">
-            <strong>Cause:</strong> ${errorMsg || "No response from the local bridge server."}<br>
-            Most likely the page was opened without the bridge server. Fix:
+            ${errorMsg ? `<strong>Note:</strong> ${errorMsg}<br>` : ""}
+            Act 2 runs directly in your browser with full webcam hand-tracking and mouse mode!
           </p>
-          <ol class="banner-fix-steps">
-            <li>Start the server first — in this folder run <code>python server.py</code> (port 8080).</li>
-            <li>Open the site via <code>http://localhost:8080</code> (NOT by double-clicking the .html file).</li>
-            <li>Click one of the buttons again below.</li>
-          </ol>
-        </div>
-        <div class="banner-footer-row">
-          <button class="btn btn-sm btn-primary" id="btnRelaunchAct2">
-            <span>🔄 Retry Opening OpenCV Window</span>
-          </button>
-          <span class="banner-terminal-hint">Direct CLI: <code>python useless_project_temp/act2_app.py</code></span>
-        </div>
-      `;
-    } else if (state === "running-cli") {
-      // Bridge reached but the process died early: same window, show the real log reason.
-      statusContainer.innerHTML = `
-        <div class="act2-banner-card banner-state-error animate-fadeIn">
-          <div class="banner-top-row">
-            <div class="banner-badge-error">
-              <span class="error-dot"></span>
-              <span>OPENCV MANAGER CRASHED AFTER LAUNCH</span>
-            </div>
-            <span class="banner-sub">Desktop OpenCV + Pygame Window</span>
-          </div>
-          <h3 class="banner-title">The Python app started but quit immediately.</h3>
-          <p class="banner-note">${errorMsg}</p>
-          <div class="banner-footer-row">
-            <button class="btn btn-sm btn-primary" id="btnRelaunchAct2">
-              <span>🔄 Retry Opening OpenCV Window</span>
-            </button>
-            <span class="banner-terminal-hint">Direct CLI: <code>cd useless_project_temp &amp;&amp; python act2_app.py</code></span>
+          <div class="banner-footer-row" style="margin-top: 0.75rem;">
+            <a href="act2.html" class="btn btn-primary btn-sm">
+              <span>🚀 Launch Act 2 in Browser →</span>
+            </a>
+            <span class="banner-terminal-hint">Start server: <code>node server.js</code></span>
           </div>
         </div>
       `;
@@ -297,15 +274,13 @@ function renderCareerCertificate(container, verdictData, candidateName, answers)
           <div class="banner-top-row">
             <div class="banner-badge-live">
               <span class="live-dot"></span>
-              <span>PERSON 2 OPENCV MANAGER RUNNING</span>
+              <span>ACT 2 SIMULATOR ACTIVE</span>
             </div>
-            <span class="banner-sub">Desktop OpenCV + Pygame Window</span>
+            <span class="banner-sub">Interactive 30-Second Challenge</span>
           </div>
-          <h3 class="banner-title">🎮 Indian Education Machine is Live on Your Screen!</h3>
+          <h3 class="banner-title">🎮 Indian Education Machine Ready!</h3>
           <p class="banner-note">
-            The webcam hand-tracking window has launched in the foreground on your desktop.<br>
-            <strong>Check your taskbar or switch to the camera window titled:</strong><br>
-            <code>Act 2: Indian Education Machine - Oru Average Malayali</code>
+            Your career profile has been locked in. Survive the 4-direction tradeoff challenge!
           </p>
           <div class="banner-rules-row">
             <div class="rule-chip up">⬆️ UP: Academics <small>(Arts -20%)</small></div>
@@ -313,12 +288,11 @@ function renderCareerCertificate(container, verdictData, candidateName, answers)
             <div class="rule-chip down">⬇️ DOWN: Skill Dev <small>(Hacks -20%)</small></div>
             <div class="rule-chip left">⬅️ LEFT: Arts & Sports <small>(Skills -20%)</small></div>
           </div>
-        </div>
-        <div class="banner-footer-row">
-          <button class="btn btn-sm btn-secondary" id="btnRelaunchAct2">
-            <span>🔄 Re-launch OpenCV Window</span>
-          </button>
-          <span class="banner-terminal-hint">Direct CLI: <code>python useless_project_temp/act2_app.py</code></span>
+          <div class="banner-footer-row" style="margin-top: 1rem;">
+            <a href="act2.html" class="btn btn-primary" id="btnGoAct2">
+              <span>🎮 Enter Survival Arena →</span>
+            </a>
+          </div>
         </div>
       `;
     }
@@ -338,79 +312,51 @@ function renderCareerCertificate(container, verdictData, candidateName, answers)
     if (typeof audioManager !== "undefined") audioManager.playClick();
     localStorage.setItem("oru_average_malayali_session", JSON.stringify(sessionData));
 
-    // Immediate "launching" feedback — but never claim success yet.
     if (btnStart) {
       btnStart.classList.remove("btn-error");
       btnStart.classList.add("btn-launched");
       btnStart.innerHTML = `
         <span class="btn-icon">🚀</span>
-        <span>OpenCV Manager Launching…</span>
+        <span>Entering Act 2 Arena…</span>
         <span class="live-pulse-dot"></span>
       `;
     }
     renderStatusBanner("launching");
 
-    // Call local server bridge to launch Person 2 OpenCV desktop application directly
+    // Call local server bridge to record session and transition to Act 2
     fetch("/api/start-act2", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(sessionData)
     })
-      .then(r => {
-        if (!r.ok) {
-          throw new Error("Bridge server returned HTTP " + r.status + ". Start it with: python server.py");
-        }
-        return r.json();
-      })
+      .then(r => (r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status))))
       .then(res => {
-        console.log("[Bridge] Server OpenCV launch response:", res);
-        if (res.launched === true) {
-          if (btnStart) {
-            btnStart.innerHTML = `
-              <span class="btn-icon">🚀</span>
-              <span>OpenCV Manager Active on Screen</span>
-              <span class="live-pulse-dot"></span>
-            `;
-          }
-          renderStatusBanner("running");
-        } else {
-          if (btnStart) {
-            btnStart.classList.remove("btn-launched");
-            btnStart.classList.add("btn-error");
-            btnStart.innerHTML = `<span class="btn-icon">⚠️</span><span>Launch Failed — Retry</span>`;
-          }
-          renderStatusBanner("running-cli", res.error || "Process exited immediately. See act2_launch.log in useless_project_temp.");
-        }
+        console.log("[Bridge] Server response:", res);
+        renderStatusBanner("running");
+        setTimeout(() => {
+          window.location.href = res.url || "act2.html";
+        }, 800);
       })
       .catch(err => {
-        console.log("[Bridge] Launch failed:", err.message);
-        if (btnStart) {
-          btnStart.classList.remove("btn-launched");
-          btnStart.classList.add("btn-error");
-          btnStart.innerHTML = `<span class="btn-icon">⚠️</span><span>Bridge Not Reached — Click To Fix</span>`;
-        }
+        console.log("[Bridge] Server offline, direct browser transition:", err.message);
         renderStatusBanner("error", err.message);
+        setTimeout(() => {
+          window.location.href = "act2.html";
+        }, 1200);
       });
   }
 
-  // Optional health pre-check so the judge immediately sees if the bridge is reachable
+  // Optional health pre-check so the user knows server is ready
   fetch("/api/health")
     .then(r => (r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status))))
     .then(health => {
-      if (health.status === "ok" && !health.act2_script_exists) {
-        const tip = document.createElement("div");
-        tip.className = "bridge-health-warning";
-        tip.innerHTML = "⚠️ Bridge is up, but <code>act2_app.py</code> was not found where expected.";
-        btnStart.parentNode.insertBefore(tip, btnStart.nextSibling);
-      }
+      console.log("[Health] Bridge server online:", health);
     })
     .catch(() => {
       const tip = document.createElement("div");
       tip.className = "bridge-health-warning";
       tip.innerHTML = `
-        ⚠️ <strong>Local bridge server not detected.</strong> Open this site through
-        <code>http://localhost:8080</code> (run <code>python server.py</code> first) — otherwise the
-        OpenCV window cannot launch from the button.
+        💡 <strong>Tip:</strong> Run <code>node server.js</code> for full integrated session persistence!
       `;
       btnStart.parentNode.insertBefore(tip, btnStart.nextSibling);
     });

@@ -28,21 +28,28 @@ Then comes their course; we let them manage between projects, hackathons, extrac
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- **Languages used:** Python, JavaScript, HTML5, CSS3
-- **Frameworks used:** Pygame
-- **Libraries used:** OpenCV, MediaPipe, NumPy, Google Gemini API, Web Audio API
-- **Tools used:** VS Code, Git, Google AI Studio, PowerShell, Python HTTP Server
-
+- **Languages used:** JavaScript (Node.js, ES6+), HTML5, CSS3
+- **Frameworks & APIs used:** Web Audio API, HTML5 Canvas 2D, WebRTC MediaDevices, Google Gemini API
+- **Libraries used:** Node.js native HTTP/FS/Path, MediaPipe Web Computer Vision
+- **Tools used:** VS Code, Git, Google AI Studio, PowerShell, Node.js
 
 ### Implementation
 For Software:
 # Installation
+Zero external heavy dependencies required (pure Node.js):
 ```bash
-pip install opencv-python mediapipe pygame numpy
+# Optional dependencies (if any):
+npm install
 ```
 # Run
 ```bash
-python server.py 8080
+npm run dev
+# or: node server.js 8080
+```
+# Test
+```bash
+node test_act2.js
+# or: npm test
 ```
 Open `http://localhost:8080` in your browser.
 
